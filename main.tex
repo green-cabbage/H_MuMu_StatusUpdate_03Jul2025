@@ -1,0 +1,650 @@
+\documentclass[dvipsnames,aspectratio=169]{beamer}
+
+
+% Setup appearance:
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usetheme{metropolis}
+
+\usepackage[]{xcolor}
+\usepackage{hyperref}
+\usepackage[export]{adjustbox}
+
+%\usetheme{Darmstadt}
+%\mode<presentation>
+%{
+%  %\usetheme{Copenhagen}
+%  \usetheme{Dresden}
+%  %\usetheme{Darmstadt}
+%  \useoutertheme{smoothbars}
+%  \useinnertheme{rounded}
+%  \usecolortheme{orchid}
+%  \usecolortheme{whale}
+
+%  \useoutertheme{infolines}
+
+%  \setbeamerfont{block title}{size={}}
+
+%  \setbeamercovered{transparent}
+
+%  \definecolor{darkred}{RGB}{170,20,20}
+%  \definecolor{jg-gray}{RGB}{100,100,100}
+%  \setbeamercolor*{structure}{fg=darkred}
+%  %\setbeamercolor*{structure}{fg=jg-gray}
+
+%  \usefonttheme{professionalfonts}
+%}
+%\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\large,series=\bfseries}
+\setbeamertemplate{frametitle}[default][center]
+%\setbeamerfont*{textnormal}{size=\normalsize}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}
+
+
+
+
+%\setbeamercolor{normal text}{fg=black,bg=white}
+%\setbeamercolor{structure}{fg=black}
+
+
+
+
+%\setbeamercolor{block body}{use=block title,bg=white}% Standard packages
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage{times}
+%\usepackage[T1]{fontenc}
+\usepackage{caption}
+%\captionsetup{figurename=Fig.}
+\usepackage{multirow}
+\usepackage{ulem}
+%\usepackage{mathpazo}
+%\usepackage{feynmp}
+\unitlength = 1mm
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{overpic}
+\usepackage{rotating}
+% Setup TikZ
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+\newenvironment{rcases}{%
+  \left.\renewcommand*\lbrace.%
+  \begin{cases}}%
+{\end{cases}\right\rbrace}
+
+\usepackage{tikz}
+
+ 
+\makeatletter
+\def\tikzonnode#1{%
+\pgfutil@ifnextchar[{\tikzonnode@opt#1}{\tikzonnode@opt#1[]}%
+}
+\def\endtikzonnode{%
+\end{scope}%
+}
+\def\tikzonnode@opt#1[#2]{%
+\pgfpointanchor{#1}{south west}%
+\pgfgetlastxy\tse@tikz@shift@x\tse@tikz@shift@y
+\begin{scope}[
+shift={(\tse@tikz@shift@x,\tse@tikz@shift@y)},
+x={(#1.south east)},
+y={(#1.north west)},
+#2]%
+}
+ 
+\def\tikzonimage{%
+\pgfutil@ifnextchar[{\tikzonimage@opt}{\tikzonimage@opt[]}%
+}
+\def\tikzonimage@opt[#1]#2{%
+\begin{tikzpicture}
+\node[inner sep=0] (image) {\includegraphics[#1]{#2}};
+\begin{tikzonnode}{image}%
+}
+\def\endtikzonimage{%
+\end{tikzonnode}
+\end{tikzpicture}%
+}
+\makeatother
+
+\newcommand{\textStamp}[1]{\Large\color{red}\fbox{#1}\normalsize\color{black}}
+
+
+\newcommand{\overlayGraphic}[4]{
+        % graphic option, path, position, text
+        \begin{tikzonimage}[#1]{#2}
+                \path (#3) node {#4};
+        \end{tikzonimage}
+}
+
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage{multirow}
+\usepackage{subfigure}
+\usepackage[]{hyperref}
+\definecolor{darkblue}{rgb}{0,0,.5}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=darkblue, menucolor=darkblue, pagecolor=darkblue, urlcolor=darkblue,urlbordercolor={1 0.5 0.25}}
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{byzantine}{rgb}{0.74, 0.2, 0.64}
+%\usepackage{ptdr-definitions}
+%\usetikzlibrary{arrows}
+%\tikzstyle{block}=[draw opacity=0.7,line width=1.4cm]
+% \newcommand{\NMC}{\ensuremath{N_{MC}}\xspace}
+% \newcommand{\NSM}{\ensuremath{N_{SM}}\xspace}
+% \newcommand{\pLN}{\ensuremath{p_{LN}}\xspace}
+% \newcommand{\pNorm}{\ensuremath{p_{Norm}}\xspace}
+% \newcommand{\mustar}{\ensuremath{\mu^*}\xspace}
+% \newcommand{\fstar}{\ensuremath{f^*}\xspace}
+% \newcommand{\mstar}{\ensuremath{m^*}\xspace}
+% \newcommand{\Ptil}{\ensuremath{\tilde{P}}\xspace}
+% 
+% % Measurements and units...
+% 
+% \newcommand{\de}{\ensuremath{^\circ}}
+% \newcommand{\ten}[1]{\ensuremath{\times \textnormal{10}^\textnormal{#1}}}
+% \newcommand{\unit}[1]{\ensuremath{\textnormal{\,#1}}\xspace}
+% \newcommand{\mum}{\ensuremath{\,\mu\textnormal{m}}\xspace}
+% \newcommand{\micron}{\ensuremath{\,\mu\textnormal{m}}\xspace}
+% \newcommand{\cm}{\ensuremath{\,\textnormal{cm}}\xspace}
+% \newcommand{\mm}{\ensuremath{\,\textnormal{mm}}\xspace}
+% \newcommand{\fm}{\ensuremath{\,\textnormal{fm}}\xspace}
+% \newcommand{\ns}{\ensuremath{\,\textnormal{ns}}\xspace}
+% \newcommand{\mus}{\ensuremath{\,\mu\textnormal{s}}\xspace}
+% \newcommand{\keV}{\ensuremath{\,\textnormal{ke\hspace{-.08em}V}}\xspace}
+% \newcommand{\MeV}{\ensuremath{\,\textnormal{Me\hspace{-.08em}V}}\xspace}
+% \newcommand{\GeV}{\ensuremath{\,\textnormal{Ge\hspace{-.08em}V}}\xspace}
+% \newcommand{\geV}{\ensuremath{\,\textnormal{Ge\hspace{-.08em}V}}}
+% \newcommand{\TeV}{\ensuremath{\,\textnormal{Te\hspace{-.08em}V}}\xspace}
+% \newcommand{\teV}{\ensuremath{\mathrm{\; TeV}}\xspace}
+% \newcommand{\PeV}{\ensuremath{\,\textnormal{Pe\hspace{-.08em}V}}\xspace}
+% 
+% \newcommand{\pbinv} {\mbox{\ensuremath{\,\textnormal{pb}^\textnormal{\scriptsize{$-$1}}}}\xspace}
+% \newcommand{$fb^{-1}} {\mbox{\ensuremath{\,\textnormal{fb}^\textnormal{\scriptsize{$-$1}}}}\xspace}
+% \newcommand{\nbinv} {\mbox{\ensuremath{\,\textnormal{nb}^\textnormal{$-$1}}}\xspace}
+% \newcommand{\percms}{\ensuremath{\,\textnormal{cm}^\textnormal{$-$2}\,\textnormal{s}^\textnormal{$-$1}}\xspace}
+% \newcommand{\lumi}{\ensuremath{\mathcal{L}}}
+% \newcommand{\Lumi}{\ensuremath{\mathcal{L}}\xspace}
+% 
+
+\usepackage{ulem}
+\usepackage{hyperref}
+\newcommand{\EE}{\ensuremath{e^{+}e^{-}}\xspace}
+\newcommand{\GeV}{~GeV\xspace}
+\newcommand{\mll}{\ensuremath{m_{ll}}\xspace}
+\newcommand{\MM}{\ensuremath{\mu^{+}\mu^{-}}\xspace}
+\newcommand{\PW}{W}
+\newcommand{\Z}{Z}
+\newcommand{\Ztautau}{\ensuremath{\Z\to\tau\tau}}
+\newcommand{\cls}{\ensuremath{\mathrm{CL_S}}}
+\newcommand{\tauh}{\ensuremath{\tau_\text{h}}}
+\newcommand{\rmue}{\ensuremath{r_{\Pgm{}\Pe}}\xspace}
+\newcommand{\nvert}{\ensuremath{N_\text{Vertices}}}
+\newcommand{\njets}{\ensuremath{N_\text{Jets}}}
+\newcommand{\mcut}{\ensuremath{m_\text{max}}}
+\newcommand{\eps}{\ensuremath{\epsilon}}
+\newcommand{\CLS}{\cls}
+\newcommand{\Rinout}{\ensuremath{R_\text{in/out}}\xspace}
+\newcommand{\Rsfof}{\ensuremath{R_\text{SF/OF}}\xspace}
+\newcommand{\etalep}{\ensuremath{\eta_\text{lep}}\xspace}
+
+\newcommand{\sSeven}{\ensuremath{\sqrt{s}=7\TeV}\xspace}
+\newcommand{\sEight}{\ensuremath{\sqrt{s}=8\TeV}\xspace}
+\newcommand{\lepSec}{The applied lepton selection changed in the \sEight-MC with respect to the \sSeven-MC}
+
+%\newcommand{\eepm}{\Pep\Pem}
+%\newcommand{\mmpm}{\Pgmp\Pgmm}
+\newcommand{\EM}{\ensuremath{e^{\pm} \mu^\mp}}
+
+%PAS things
+\newcommand{\Ht}{\HT}
+\newcommand{\Njets}{$N_{\text{jets}}$\xspace}
+\newcommand{\MET}{$E_{\mathrm{T}}^{\mathrm{miss}}$\xspace}
+\newcommand{\HT}{$H_{\mathrm{T}}$\xspace}
+\newcommand{\pt}{$p_{\mathrm{T}}$\xspace}
+\newcommand{\wjets}{\ensuremath{\PW+\text{jets}}\xspace}
+\newcommand{\zjets}{\ensuremath{\Z+\text{jets}}\xspace}
+\newcommand{\DYjets}{\ensuremath{\text{DY}+\text{jets}}\xspace}
+\newcommand{\ttll}{$\ttbar\rightarrowl^+l^-$}
+\newcommand{\tttau}{$\ttbar\rightarrow\tau^+l^-$}
+\newcommand{\tthad}{$\ttbar\rightarrow{}q\bar{q}$}
+\newcommand{\ttbar}{$t\bar{t}$}
+\newcommand{\lumifinal}{9.2\fbinv}
+\newcommand{\fbinv}{$fb^{-1}$}
+%\newcommand{\lumi}{\ensuremath{0.920 \; \fbi}}
+
+
+\newcommand{\secondchi}{\ensuremath{{\tilde{\chi}^0_2}}\xspace}
+\newcommand{\firstchi}{\ensuremath{{\tilde{\chi}^0_1}}\xspace}
+\newcommand{\sbottom}{\ensuremath{\tilde{b}}\xspace}
+\newcommand{\slepton}{\ensuremath{\tilde{l}}\xspace}
+
+\newcommand{\JZB}{\ensuremath{\mathrm{JZB}}\xspace}
+\newcommand{\jzb}{\JZB}
+\newcommand{\ptll} {\ensuremath{\pt_{ll}}}
+\newcommand{\CTEQ} {{\textsc{cteq}}}
+
+\newcommand{\central}{central\xspace}
+\newcommand{\inclusive}{inclusive\xspace}
+\newcommand{\cfAN}[1]{(cf.~#1)}
+\newcommand{\ethAN}[1]{\cite{JZBAN} Sec.~#1}
+\newcommand{\ethANApp}[1]{\cite{JZBAN} App.~#1}
+\newcommand{\acAN}[1]{\cite{EdgeAN} Sec.~#1}
+\newcommand{\acANApp}[1]{\cite{EdgeAN} App.~#1}
+\newcommand{\benAN}[1]{\cite{TemplatesAN} Sec.~#1}
+%\newcommand{\ethAN}[1]{\texttt{AN-12-231} sec. #1}
+%\newcommand{\acAN}[1]{\texttt{AN-12-200} sec. #1}
+%\newcommand{\benAN}[1]{\texttt{AN-12-359} sec. #1}
+\newcommand{\addAN}[1]{\fixme{#1}}
+% % physics symbols
+% \newcommand{$E_T^{miss}$}{\ensuremath{{E\!\!\!/}_{\mathrm{{T}}}}\xspace}
+% \newcommand{\MINV}{\ensuremath{M_{inv}}\xspace}
+% %\newcommand{\Wprime}{\ensuremath{\mathrm{W' \rightarrow \mu + \nu}}\xspace}
+% \def\Wprime{$W^\prime$\ }
+%\def\pt{$p_{T}$\ }
+% \def\MT{$M_{T}$\ }
+% \def\ttbar{$t\bar{t}$\ }
+% \def\WprimeENu{$W^\prime \rightarrow e \nu $\ }
+% Author, Title, etc.
+% \AtBeginSection[]
+% {
+%  \begin{frame}
+%       \frametitle{\"Ubersicht}
+%       \tableofcontents[currentsection]
+%   \end{frame}
+% }
+%\setbeamerfont{section title}{%
+ % family=\rmfamily,series=\bfseries,size=\normalsize}
+\setbeamercolor{section title}{bg=white,fg=white}
+\setbeamertemplate{section page}
+{
+  \begin{centering}
+    {\usebeamerfont{section name}\usebeamercolor[fg]{section name}}
+    \vskip1em\par
+    %\begin{beamercolorbox}[sep=16pt,center]{part title}
+      \usebeamerfont{section title}\insertsection\par
+    %\end{beamercolorbox}
+  \end{centering}
+}
+\def\sectionpage{\usebeamertemplate*{section page}}
+%\AtBeginSection{\frame{\sectionpage}}
+
+
+
+% \titlegraphic{\begin{columns}
+% \column{0.5\textwidth}
+% \centering
+% % \includegraphics[width=0.75\textwidth]{images/Purdue-Sig-Black-Gold-rgb.png}
+%  \end{columns} 	}
+
+
+ \titlegraphic{\includegraphics[width=4.2cm]{images/Purdue-Sig-Black-Gold-rgb.png}}
+% 
+\title[]{\huge{H $\rightarrow$ $\mu\mu$ analysis Status Update}} 
+
+ \author[Hyeon-Seo Yun]{Hyeon-Seo Yun, Ram Krishna Sharma, Norbert Neumeister}
+
+
+ \date[\today]{\today}
+
+\institute[Purdue University]{}
+
+
+\renewcommand{\footnoterule}{\vspace{2ex} \hrule width 0.3\textwidth height 0.2pt \vspace{1ex}} % lowers the footnote position
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Interest \& Focus of Purdue Group}
+    \begin{itemize}
+    \item Our Interest
+    \begin{itemize}
+    \item Work on a list of improvements contributing to the analysis (shown later in this presentation), which we validate on Run~2 samples.
+    \item Contribute in both ggH + VBF channels for Run~2 \& Run~3 $H\rightarrow \mu\mu$ analysis. 
+    \item Contribute nanoAOD-based framework workflow, which we validate on Run2 and improved over the years.
+    \end{itemize}
+    \item Focus
+    \begin{itemize}
+    \item Overall goal: combine Run~2 + Run~3 to reach to 5$\sigma$.
+    \item Target: Improve analysis to achieve a significance on the order of 5\% better than in Run~2~\footnote{https://indico.cern.ch/event/1451198/#sc-26-2-contribution-2} to reach overall 5$\sigma$.
+    \item Current focus: achieve 5\% improvement in significance primarily from improvement in $m_{\mu\mu}$ resolution, production channel categorization and modeling and test this with Run~2 data.
+    \item Afterwards, apply our improvement to 2022 \& 2023 samples.
+    \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Projection of $m_{\mu\mu}$ resolution impact on significance}
+    \begin{itemize}
+    \item A previous study done by Dmitry Kondratyev estimated 10\% improvement in $m_{\mu\mu}$ resolution for 5\% improvement in significance (AN-2022/145).
+    \item A separate study estimates 7\% improvement in $m_{\mu\mu}$ resolution is needed to improve significance by 5\% in ggH channel.
+    \item Overall, if we aim for a 5\% improvement in significance purely from improvement in $m_{\mu\mu}$ resolution, we estimate 7-10\% $m_{\mu\mu}$ resolution improvement is necessary.
+    \end{itemize}
+    \begin{figure}[!h]
+    \centering
+    {\includegraphics[width=0.6\textwidth]{images/projection/projection_dmitry.png}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Run~2 re-analysis}
+    \begin{itemize}
+    \item Use ultra legacy (UL) samples instead of RERECO campaign.
+    \begin{itemize}
+    \item Better rejection of bad quality events (about $0.01\%$ less events).
+    \item Better muon alignment that in turn improves $m_{\mu\mu}$ resolution.
+    \item Improved jet energy resolution and correction.
+    \end{itemize}
+    \item Not all MC from previous iteration are available for UL
+    \begin{itemize}
+    \item Study MiNNLO DY samples as potential replacement of mass binned DY sample.
+    \item VBF-filtered DY not available for UL: Private production of 72 million events.
+    \item ggH AMC@NLO sample not available for UL.
+    \end{itemize}
+    \item Improve $m_{\mu\mu}$ resolution by applying beamspot constraint (BSC) fit.
+    \begin{itemize}
+    \item Produced nanoAODv12 UL samples as nanoAODv9 doesn't contain variables necessary for BSC fit.
+    \end{itemize}
+    \item New nanoAOD-based framework was developed $\Rightarrow$ Faster and Cleaner.
+    \item Compared dimuon kinematics of different signal MC samples
+    \item Z $p_\mathrm{T}$ correction was re-developed with a polynomial order obtained from F-test.
+    \item New XGBoost based BDT was trained and used in our UL workflow.
+    \end{itemize}
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Run2 Re-analysis p2}
+%     \begin{itemize}
+%     \item Improve $m_{\mu\mu}$ resolution by applying beamspot constraint (BSC) fit
+%     \begin{itemize}
+%     \item Produced nanoAODv12 UL samples as nanoAODv9 doesn't contain variables necessary for BSC fit
+%     \end{itemize}
+%     \item New NanoAOD-based framework was developed $\Rightarrow$ Faster and Cleaner
+%     \item Zpt correction was re-developed with a polynomial order obtained from F-test
+%     \item New XGBoost based BDT was trained and used in our UL workflow
+%     \end{itemize}
+% \end{frame}
+
+\begin{frame}
+    \frametitle{Highlight: beamspot constraint fit}
+    % {
+    % \fontsize{11pt}{11pt}\selectfont 
+    \begin{itemize}
+    \item In the past, our group worked with muon POG on the method to improve muon $p_\mathrm{T}$ resolution: \textbf{beamspot constraint (BSC) fit} \footnote{https://indico.cern.ch/event/1336377/#1-vxbs-method-in-run-3-and-nan}
+    \begin{itemize}
+        \item This improves $p_\mathrm{T}^\mu$ resolution, which in turn improves $m_{\mu\mu}$ resolution.
+        \item Successfully merged the BS calibrated variables in CMSSW
+        \item New variables are available in nanoAODv12 or newer
+    \end{itemize} 
+    \item We apply BSC fit last after applying all other corrections (i.e. Rochester, FSR). 
+    
+    \end{itemize}
+    % }
+        \begin{columns}
+    \begin{column}{0.6\textwidth}
+    {
+    % \fontsize{9pt}{9pt}\selectfont 
+    \begin{itemize}
+    \item We observe $\approx6\%$ improvement in $m_{\mu\mu}$ resolution vs Geofit
+    \item We propose to make BSC as default correction replacing Geofit.
+    \begin{itemize}
+    \item Other Higgs analysis groups (ie $H\rightarrow ZZ$) are migrating to BSC fit.
+    \end{itemize}
+    \end{itemize}
+    }
+    \end{column}
+
+    \begin{column}{0.4\textwidth}
+            \begin{figure}
+        \centering
+        \includegraphics[width=5.5cm, height=4cm]{images/BSC/BSC_geofit_comparison.pdf}
+    \end{figure}
+    \end{column}
+
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Highlight: event-by-event $m_{\mu\mu}$ resolution calibration}
+    \begin{columns}
+        
+    \begin{column}{0.5\textwidth}
+    
+    \begin{itemize}
+    \item { In ggH channel, BDT is trained with weight of inverse event-by-event $m_{\mu\mu}$ resolution applied.}
+    \item { Therefore, an accurate value of event-by-event $m_{\mu\mu}$ resolution is needed, and new calibration factors were developed.}
+    \item {Closure test is performed for validation, and results show improved event-by-event $m_{\mu\mu}$ resolution.}
+    \item To access the calibration factors, please contact us!
+    \end{itemize}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+            \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{images/closure_2018C.png}%
+        % \caption{Caption}
+        \label{fig:enter-label}
+    \end{figure}
+    \end{column}
+
+    \end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+    \frametitle{Highlight: new nanoAOD based framework}
+    \begin{itemize}
+    \item Originally designed and developed by Dmitry Kondratyev for previous iteration of this analysis.
+    \item Framework was updated with latest coffea package
+    \begin{itemize}
+    \item Awkward-array and HEP vector for jagged array compute + Dask for parallelization
+    \end{itemize}
+    \item Implemented on Purdue Analysis Facility \footnote{https://analysis-facility.physics.purdue.edu/en/latest/}
+    \item Yaml-file based configuration for clean user interface (based on PocketCoffea)
+    \item Dask Gateway is used to scale-out workflow \& automate worker allocation (Max workers: $\approx200$)
+    \item Performance for full Run~2 Data \& MC:
+    \begin{itemize}
+    \item Runtime: 6 hours
+    \item Output storage: 304 GB
+    \item Scale out CPU cores: 160
+    \end{itemize}
+    \item \href{https://github.com/green-cabbage/copperheadV2}{Github link to framework}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Highlight: ggH signal MC $m_{\mu\mu}$ resolution from muon alignment}
+    \begin{itemize}
+    \item Using official nanoAODv9 samples (with no improvement), we look at possible improvement at $m_{\mu\mu}$ resolution due to UL transition
+    \item ggH signal RERECO \& UL samples were divided into muon detector regions of leading and sub-leading muon categories (muon $|\eta|$ category)
+    \item Each category was fit with a double crystal ball in $110\leq m_{\mu\mu} \leq 150$ GeV region and the fit $m_{\mu\mu}$ resolution ($\sigma$) was extracted
+    \end{itemize}
+    \begin{table}[h]
+    \centering
+    \begin{tabular}{lccc}
+        \hline
+        Muon $|\eta|$ Category & RERECO fit $\sigma$ & UL fit $\sigma$ & Improvement \\
+        \hline
+        OE & $2.35 \pm 0.01$ & $2.31 \pm 0.02$ & 1.86\% \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{itemize}
+\item We observe a small overall improvement in $m_{\mu\mu}$ resolution, and significant improvement when leading and sub-leading muons are detected in overlap-endcap (OE) regions of the detector.
+\end{itemize}
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Highlight: different ggH signal MC modeling}
+%     \begin{itemize}
+%     \item In ggH channel, simulated signal distributions of $m_{\mu\mu}$ $p_T^{\mu\mu}$ significantly impact our results
+%     \begin{itemize}
+%     \item $m_{\mu\mu}$ resolution has a direct impact in combine fit
+%     \item $p_T^{\mu\mu}$ is the most important input feature in ggH channel BDT
+%     \end{itemize}
+%     \item In previous iteration, ggH powheg was used to train BDT but ggH AMC@NLO was used for ultimate evaluation
+%     \item We compared the distributions of $m_{\mu\mu}$, $p_T^{\mu\mu}$ between ggH powheg and ggH AMC@NLO
+%     \item We observe significant difference in $p_T^{\mu\mu}$ distribution (RIGHT) between powheg and AMC@NLO
+%     \item This suggests that we need to use the same sample for train \& evaluation of ggH channel BDT.
+%     % \item This leads to simulated $m_{\mu\mu}$ resolution difference for powheg sample $\approx1.4 \%$
+    
+%     \end{itemize}
+% \begin{figure}[!h]
+% \centering
+% {\includegraphics[width=0.32\textwidth]{images/ggH_sampleStudy/RerecMcModelComparison_mu1_pt.pdf}}
+% {\includegraphics[width=0.32\textwidth]{images/ggH_sampleStudy/RerecMcModelComparison_mu2_pt.pdf}}
+% {\includegraphics[width=0.32\textwidth]{images/ggH_sampleStudy/RerecMcModelComparison_dimuon_pt.pdf}}
+% \end{figure}
+% \end{frame}
+
+
+
+\begin{frame}{Highlight: different ggH signal MC modeling}
+    \begin{columns}
+        % Left column for text (takes 60% width)
+        \begin{column}{0.7\textwidth}
+        {\fontsize{10pt}{12pt}\selectfont 
+            \begin{itemize}
+            \item In ggH channel, simulated signal distributions of $m_{\mu\mu}$ and $p_\mathrm{T}^{\mu\mu}$ significantly impact our results
+            \begin{itemize}
+            \item $m_{\mu\mu}$ resolution has a direct impact in combine fit.
+            \item $p_\mathrm{T}^{\mu\mu}$ is the most important input feature in ggH BDT.
+            \end{itemize}
+            \item In previous iteration, ggH Powheg was used to train BDT but ggH AMC@NLO was used for ultimate evaluation.
+            \item We compared the distributions of $m_{\mu\mu}$, $p_\mathrm{T}^{\mu\mu}$ between ggH Powheg and ggH AMC@NLO.
+            \item We observe similarity in $m_{\mu\mu}$ (top), but significant difference in $p_\mathrm{T}^{\mu\mu}$ distribution (bottom) between Powheg and AMC@NLO.
+            \item Results suggest that we need to use consistent ggH MC for train \& evaluation.
+            \end{itemize}
+        }
+        \end{column}
+        
+        % Right column for figure (takes 40% width)
+        \begin{column}{0.3\textwidth}
+            \centering
+            {\includegraphics[width=0.9\textwidth]{images/ggH_sampleStudy/RerecMcModelComparison_dimuon_mass.pdf}}\\
+            {\includegraphics[width=0.9\textwidth]{images/ggH_sampleStudy/RerecMcModelComparison_dimuon_pt.pdf}}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Highlight: simpler Zpt correction}
+%     \begin{itemize}
+%     \item We determine the maximum order of polynomial fit to apply to our correction using F-test. Result: maximum five (previously 12)
+%     \item We apply polynomial fit of Data/ (DY MC) over $p^{\mu\mu}_T$ from Z boson control region divided by jet multiplicity category and obtain Zpt correction SF as function of $p^{\mu\mu}_T$
+%     \end{itemize}
+% \begin{figure}[!h]
+% \centering
+% {\includegraphics[width=0.32\textwidth]{images/zpt/dimuon_pt_no_zpt.pdf}}
+% {\includegraphics[width=0.32\textwidth]{images/zpt/dimuon_pt_yes_zpt.pdf}}
+% \end{figure}
+% \end{frame}
+
+\begin{frame}{Highlight: Z $p_\mathrm{T}$ correction}
+    \begin{columns}
+        % Left column for text (takes 60% width)
+        \begin{column}{0.75\textwidth}
+            {\fontsize{10pt}{12pt}\selectfont 
+            \begin{itemize}
+            \item Due to missing resummation QCD effect in DY simulation, significant data/MC disagreement is observed at low $p_\mathrm{T}^{\mu\mu}$ region.
+            \item In the previous iteration, 12th order polynomial fit was applied as a function of $p_\mathrm{T}^{\mu\mu}$ within Z control region.
+            \item Separate fits are done for each era and different NJet multiplicities.
+            \item We ran F-test to obtain order of polynomial fit, which lead to maximum order of five.
+            % \item We determine the maximum order of polynomial fit to apply to our correction using F-test.
+            % \begin{itemize}
+            % Result: maximum order of five (previously 12)
+            % \end{itemize}
+            % \item We apply polynomial fit of Data/ (DY MC) over $p^{\mu\mu}_T$ from Z boson control region divided by jet multiplicity category and obtain Zpt correction SF as function of $p^{\mu\mu}_T$
+            \item Overall, we observe improvements in data/MC compared to previous iteration (i.e. $\approx$10 \% improvement for 2018 Njet=1)
+            \item Z $p_\mathrm{T}$ correction applied $p_\mathrm{T}^{\mu\mu}$ in Higgs mass region from HIG-19-006 (Top) and our results (Bottom) for 2018 Njet=1 category
+            \end{itemize}
+            }
+        \end{column}
+        
+        % Right column for figure (takes 40% width)
+        \begin{column}{0.25\textwidth}
+            \centering
+            % {\includegraphics[width=0.9\textwidth]{images/zpt/dimuon_pt_no_zpt.pdf}}\\
+            % {\includegraphics[width=0.9\textwidth]{images/zpt/dimuon_pt_yes_zpt.pdf}}
+            {\includegraphics[width=0.9\textwidth]{images/zpt/AN_2018_Njet1_zpt.png}}\\
+            {\includegraphics[width=0.9\textwidth]{images/zpt/our_2018_Njet1_zpt.pdf}}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Projection of $m_{\mu\mu}$ resolution impact on significance}
+%     \begin{itemize}
+%     \item Estimate necessary improvement in $m_{\mu\mu}$ resolution to obtain 5\% significance improvement in ggH channel.
+%     \item Artificially improved $m_{\mu\mu}$ resolution of signal fit by 20\% and obtain a new expected significance for ggH channel.
+%     \item Simple linear projection is made with current results to estimate the necessary improvement in $m_{\mu\mu}$ resolution to meet target results.
+%     \end{itemize}
+%     \begin{table}[h]
+%     \centering
+%     \begin{tabular}{|l|l|}
+%         \hline
+%         \textbf{Metric} & \textbf{Value} \\
+%         \hline
+%         Current expected significance of ggH channel  & 1.70 $\sigma$ \\
+%         Expected significance with 20\% improvement in $m_{\mu\mu}$ res  & 1.93 $\sigma$ \\
+%         $\Delta$ significance per percent (gradient) & 0.0116 $\frac{\sigma}{\%}$\\
+%         5\% $\Delta$ significance from HIG-19-006 & 0.0776 $\sigma$  \\
+%         Improvement in $m_{\mu\mu}$ res needed for 5\% $\sigma$ improvement & 6.70 \% \\
+%         \hline
+%     \end{tabular}
+%     \label{tab:significance_improvement}
+% \end{table}
+
+% \end{frame}
+
+
+\begin{frame}
+    \frametitle{Summary}
+\begin{itemize}
+\item So far with the list of improvements, we obtain preliminary results that indicate improvement just in ggH channel as shown in table below compared to HIG-19-006.
+\end{itemize}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|cc|cc|}
+\hline
+\textbf{Channel} & \multicolumn{2}{c|}{\textbf{HIG-19-006}} & \multicolumn{2}{c|}{\textbf{Our current results}} \\
+ & Expected & Observed & Expected & Observed \\
+\hline
+ggH & 1.57 & 1.23 & 1.70 & - \\
+\hline
+\end{tabular}
+\label{tab:ggh_comparison}
+\end{table}
+    \begin{itemize}
+    \item Based on preliminary studies, we are confident in 5\% improvement target for Run~2.
+    
+    \begin{itemize}
+    \item We aim to apply the improved methods to 2022 and 2023 samples as well.
+    \end{itemize}
+    \item We are happy to give a more comprehensive presentation on all/select topics mentioned above in a future meeting.
+    \item More details can be found on AN-2023/017.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Further Studies}
+    In addition to improvements in $m_{\mu\mu}$ resolution, we list few topics we're interested in improving in the future.
+    \begin{itemize}
+    \item We are working on better channel categorization between ggH and VBF.
+    \item Improve our current MVA to be systematics-aware/agnostic.
+    \item Study switching to MiNNLO generated DY samples in Higgs mass region.
+    \item Possible further improvement on $m_{\mu\mu}$ resolution by switching to new method used by the W Mass measurement analysis.
+    \end{itemize}
+\end{frame}
+
+
+\end{document}
